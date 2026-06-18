@@ -42,29 +42,6 @@ public class AsignacionService {
     }
 
 
-    public AsignacionResponseDTO asignarEmpleado(AsignacionRequestDTO request){
-        comprobarEmplelado(request.getIdEmpleado());
-        comprobarEquipo(request.getIdEquipo());
-
-        Asignacion varAsignacion = mapper.toAsignacion(request);
-        Asignacion respuesta = asignacionRepository.save(varAsignacion);
-        return mapper.toAsignacionResponseDTO(respuesta);
-    }
-    public AsignacionResponseDTO actualizarAsignacion(Long idAsignacion, AsignacionRequestDTO request){
-        comprobarEmplelado(request.getIdEmpleado());
-        comprobarEquipo(request.getIdEquipo());
-        Asignacion varAsignacion = localBuscarPorId(idAsignacion);
-
-        varAsignacion.setIdEmpleado(request.getIdEmpleado());
-        varAsignacion.setIdEquipo(request.getIdEquipo());
-        varAsignacion.setAccion("Actualizado");
-        varAsignacion.setActivo(request.getActivo());
-        varAsignacion.setFecha(request.getFecha());
-
-        return mapper.toAsignacionResponseDTO(asignacionRepository.save(varAsignacion));
-
-
-    }
 
 
 
