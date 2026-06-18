@@ -11,6 +11,9 @@ import com.example.ms_asignaciones.repository.AsignacionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AsignacionService {
@@ -40,6 +43,26 @@ public class AsignacionService {
         return asignacionRepository.findById(id)
                 .orElseThrow(()->new RuntimeException("La asignacion no existe"));
     }
+
+    public AsignacionResponseDTO asignarEquipoToEmpleado(Long idEquipo, Long idEmpleado){
+        comprobarEmplelado(idEmpleado);
+        comprobarEquipo(idEquipo);
+
+        Asignacion varAsignacion = Asignacion.builder()
+                .idEmpleado(idEmpleado)
+                .idEquipo(idEquipo)
+                .accion("Asignado a empleado: "+idEmpleado)
+                .fecha(LocalDate.now())
+                .build();
+
+        return mapper.toAsignacionResponseDTO(asignacionRepository.save(varAsignacion));
+    }
+
+    public List<AsignacionResponseDTO> listarAsignaciones(){
+        return mapper.toListAsignacionResponseDTO(asignacionRepository.findAll());
+    }
+
+
 
 
 
