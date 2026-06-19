@@ -29,7 +29,7 @@ public class AsignacionController {
         return ResponseEntity.ok(asignacionService.AsignacionesDeEmpleadoActivas(id));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<AsignacionResponseDTO> quitarAsignacionToEmplado (Long idAsignacion){
+    public ResponseEntity<AsignacionResponseDTO> quitarAsignacionToEmplado (@PathVariable Long idAsignacion){
         return ResponseEntity.ok(asignacionService.quitarAsignacionToEmplado(idAsignacion));
 
     }

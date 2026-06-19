@@ -9,6 +9,7 @@ import com.example.ms_asignaciones.model.Asignacion;
 import com.example.ms_asignaciones.repository.AsignacionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,12 +20,13 @@ import java.util.List;
 public class AsignacionService {
     private final AsignacionRepository asignacionRepository;
     private final AsignacionMapper mapper;
-    private final WebClientConfig webClient;
+    private final  WebClient webClientEmpleado;
+    private final WebClient webClientEquipo;
 
     //================================= COMPROBACIONES =================================
 
     public void comprobarEmpleado(Long id){
-        webClient.webClientEmpleado()
+        webClientEmpleado
                 .get()
                 .uri("/{id}",id)
                 .retrieve()
@@ -33,7 +35,7 @@ public class AsignacionService {
 
     }
     public void comprobarEquipo(Long id){
-        webClient.webClientEquipo()
+        webClientEquipo
                 .get()
                 .uri("/{id}",id)
                 .retrieve()

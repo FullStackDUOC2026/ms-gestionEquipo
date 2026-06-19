@@ -15,7 +15,7 @@ public class WebClientConfig {
     @Bean
     public WebClient webClientEquipo(){
         return WebClient.builder()
-                .baseUrl("NO EXISTO")
+                .baseUrl("http://localhost:8082")
                 .build();
     }
 }
