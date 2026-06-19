@@ -24,4 +24,14 @@ public class AsignacionController {
     public ResponseEntity<List<AsignacionResponseDTO>> listarAsignaciones(){
         return ResponseEntity.ok(asignacionService.listarAsignaciones());
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<List<AsignacionResponseDTO>> AsignacionesDeEmpleado(@PathVariable Long id){
+        return ResponseEntity.ok(asignacionService.AsignacionesDeEmpleadoActivas(id));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<AsignacionResponseDTO> quitarAsignacionToEmplado (Long idAsignacion){
+        return ResponseEntity.ok(asignacionService.quitarAsignacionToEmplado(idAsignacion));
+
+    }
+
 }

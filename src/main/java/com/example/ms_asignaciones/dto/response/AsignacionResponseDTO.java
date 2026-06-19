@@ -15,5 +15,6 @@ public class AsignacionResponseDTO {
     private Long idEmpleado;
     private Long idEquipo;
     private String accion;
+    private Boolean activo;
     private LocalDate fecha;
 }
