@@ -1,9 +1,6 @@
 package com.example.ms_asignaciones.service;
 
-import com.example.ms_asignaciones.config.WebClientConfig;
 import com.example.ms_asignaciones.dto.response.AsignacionResponseDTO;
-import com.example.ms_asignaciones.dto.response.EmpleadoResponseDTO;
-import com.example.ms_asignaciones.dto.response.EquipoResponseDTO;
 import com.example.ms_asignaciones.mapper.AsignacionMapper;
 import com.example.ms_asignaciones.model.Asignacion;
 import com.example.ms_asignaciones.repository.AsignacionRepository;
@@ -30,7 +27,7 @@ public class AsignacionService {
                 .get()
                 .uri("/{id}",id)
                 .retrieve()
-                .bodyToMono(EmpleadoResponseDTO.class)
+                .bodyToMono(Void.class)
                 .block();
 
     }
@@ -39,7 +36,7 @@ public class AsignacionService {
                 .get()
                 .uri("/{id}",id)
                 .retrieve()
-                .bodyToMono(EquipoResponseDTO.class)
+                .bodyToMono(Void.class)
                 .block();
     }
 
