@@ -25,12 +25,12 @@ public class AsignacionController {
         return ResponseEntity.ok(asignacionService.listarAsignaciones());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<List<AsignacionResponseDTO>> AsignacionesDeEmpleado(@PathVariable Long id){
+    public ResponseEntity<List<AsignacionResponseDTO>> asignacionesDeEmpleado(@PathVariable Long id){
         return ResponseEntity.ok(asignacionService.AsignacionesDeEmpleadoActivas(id));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<AsignacionResponseDTO> quitarAsignacionToEmplado (@PathVariable Long idAsignacion){
-        return ResponseEntity.ok(asignacionService.quitarAsignacionToEmplado(idAsignacion));
+    public ResponseEntity<AsignacionResponseDTO> quitarAsignacionToEmplado (@PathVariable Long id){
+        return ResponseEntity.ok(asignacionService.quitarAsignacionToEmplado(id));
 
     }
 

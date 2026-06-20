@@ -70,7 +70,7 @@ public class AsignacionService {
         List<AsignacionResponseDTO> ListTodas = listarAsignaciones();
         List<AsignacionResponseDTO> ListaAsignacionesDeUsuario = new ArrayList<>();
         for (AsignacionResponseDTO responseDTO : ListTodas){
-            if (responseDTO.getIdEmpleado().equals(idEmpleado) && (responseDTO.getActivo() == true)){
+            if (responseDTO.getIdEmpleado().equals(idEmpleado) && (responseDTO.getActivo())){
                 ListaAsignacionesDeUsuario.add(responseDTO);
             }
         }
