@@ -51,6 +51,7 @@ public class AsignacionService {
         comprobarEmpleado(idEmpleado);
         comprobarEquipo(idEquipo);
 
+
         Asignacion varAsignacion = Asignacion.builder()
                 .idEmpleado(idEmpleado)
                 .idEquipo(idEquipo)

@@ -15,7 +15,7 @@ public class WebClientConfig {
     @Bean
     public WebClient webClientEquipo(){
         return WebClient.builder()
-                .baseUrl("http://localhost:8082")
+                .baseUrl("https://equipotest-production.up.railway.app/api/v1/equipo")
                 .build();
     }
 }
