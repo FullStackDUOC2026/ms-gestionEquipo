@@ -17,37 +17,38 @@ import java.util.List;
 public class AsignacionService {
     private final AsignacionRepository asignacionRepository;
     private final AsignacionMapper mapper;
-    private final  WebClient webClientEmpleado;
+    private final WebClient webClientEmpleado;
     private final WebClient webClientEquipo;
 
     //================================= COMPROBACIONES =================================
 
-    public void comprobarEmpleado(Long id){
+    public void comprobarEmpleado(Long id) {
         webClientEmpleado
                 .get()
-                .uri("/{id}",id)
+                .uri("/{id}", id)
                 .retrieve()
                 .bodyToMono(Void.class)
                 .block();
 
     }
-    public void comprobarEquipo(Long id){
+
+    public void comprobarEquipo(Long id) {
         webClientEquipo
                 .get()
-                .uri("/{id}",id)
+                .uri("/{id}", id)
                 .retrieve()
                 .bodyToMono(Void.class)
                 .block();
     }
 
-    public Asignacion localBuscarAsignacionPorId(Long id){
+    public Asignacion localBuscarAsignacionPorId(Long id) {
         return asignacionRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("La asignacion no existe"));
+                .orElseThrow(() -> new RuntimeException("La asignacion no existe"));
     }
 
     //================================= METODOS =================================
 
-    public AsignacionResponseDTO asignarEquipoToEmpleado(Long idEquipo, Long idEmpleado){
+    public AsignacionResponseDTO asignarEquipoToEmpleado(Long idEquipo, Long idEmpleado) {
         comprobarEmpleado(idEmpleado);
         comprobarEquipo(idEquipo);
 
@@ -55,32 +56,34 @@ public class AsignacionService {
         Asignacion varAsignacion = Asignacion.builder()
                 .idEmpleado(idEmpleado)
                 .idEquipo(idEquipo)
-                .accion("Asignado a empleado: "+idEmpleado)
+                .accion("Asignado a empleado: " + idEmpleado)
                 .fecha(LocalDate.now())
                 .build();
 
         return mapper.toAsignacionResponseDTO(asignacionRepository.save(varAsignacion));
     }
 
-    public List<AsignacionResponseDTO> listarAsignaciones(){
+    public List<AsignacionResponseDTO> listarAsignaciones() {
         return mapper.toListAsignacionResponseDTO(asignacionRepository.findAll());
     }
 
-    public List<AsignacionResponseDTO> AsignacionesDeEmpleadoActivas (Long idEmpleado){
+    public List<AsignacionResponseDTO> asignacionesDeEmpleadoActivas(Long idEmpleado) {
         List<AsignacionResponseDTO> ListTodas = listarAsignaciones();
         List<AsignacionResponseDTO> ListaAsignacionesDeUsuario = new ArrayList<>();
-        for (AsignacionResponseDTO responseDTO : ListTodas){
-            if (responseDTO.getIdEmpleado().equals(idEmpleado) && (responseDTO.getActivo())){
+        for (AsignacionResponseDTO responseDTO : ListTodas) {
+            if (responseDTO.getIdEmpleado().equals(idEmpleado) && (responseDTO.getActivo())) {
                 ListaAsignacionesDeUsuario.add(responseDTO);
             }
         }
         return ListaAsignacionesDeUsuario;
     }
-    public AsignacionResponseDTO  quitarAsignacionToEmplado (Long idAsignacion){
+
+    public AsignacionResponseDTO quitarAsignacionToEmpleado(Long idAsignacion) {
         Asignacion varAsignacion = localBuscarAsignacionPorId(idAsignacion);
         varAsignacion.setActivo(false);
         return mapper.toAsignacionResponseDTO(asignacionRepository.save(varAsignacion));
     }
+
 
 
 
