@@ -14,6 +14,5 @@ public class AsignacionRequestDTO {
 
     private Long idEmpleado;
     private Long idEquipo;
-    private String accion;
-    private LocalDate fecha;
+
 }

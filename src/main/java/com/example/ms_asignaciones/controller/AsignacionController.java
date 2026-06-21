@@ -1,7 +1,9 @@
 package com.example.ms_asignaciones.controller;
 
+import com.example.ms_asignaciones.dto.request.AsignacionRequestDTO;
 import com.example.ms_asignaciones.dto.response.AsignacionResponseDTO;
 import com.example.ms_asignaciones.service.AsignacionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,8 @@ public class AsignacionController {
     private final AsignacionService asignacionService;
 
     @PostMapping("/{idEquipo}/{idEmpleado}")
-    public ResponseEntity<AsignacionResponseDTO> asignarEquipoToEmpleado (@PathVariable Long idEquipo,@PathVariable Long idEmpleado){
-        return ResponseEntity.status(CREATED).body(asignacionService.asignarEquipoToEmpleado(idEquipo,idEmpleado));
+    public ResponseEntity<AsignacionResponseDTO> asignarEquipoToEmpleado (@Valid @RequestBody AsignacionRequestDTO request){
+        return ResponseEntity.status(CREATED).body(asignacionService.asignarEquipoToEmpleado(request));
     }
     @GetMapping
     public ResponseEntity<List<AsignacionResponseDTO>> listarAsignaciones(){

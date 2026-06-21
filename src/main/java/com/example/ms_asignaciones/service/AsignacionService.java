@@ -1,6 +1,8 @@
 package com.example.ms_asignaciones.service;
 
+import com.example.ms_asignaciones.dto.request.AsignacionRequestDTO;
 import com.example.ms_asignaciones.dto.response.AsignacionResponseDTO;
+import com.example.ms_asignaciones.exception.AsignacionNotFoundException;
 import com.example.ms_asignaciones.mapper.AsignacionMapper;
 import com.example.ms_asignaciones.model.Asignacion;
 import com.example.ms_asignaciones.repository.AsignacionRepository;
@@ -19,6 +21,7 @@ public class AsignacionService {
     private final AsignacionMapper mapper;
     private final WebClient webClientEmpleado;
     private final WebClient webClientEquipo;
+
 
     //================================= COMPROBACIONES =================================
 
@@ -43,20 +46,22 @@ public class AsignacionService {
 
     public Asignacion localBuscarAsignacionPorId(Long id) {
         return asignacionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("La asignacion no existe"));
+                .orElseThrow(() -> new AsignacionNotFoundException(id));
     }
 
     //================================= METODOS =================================
 
-    public AsignacionResponseDTO asignarEquipoToEmpleado(Long idEquipo, Long idEmpleado) {
-        comprobarEmpleado(idEmpleado);
-        comprobarEquipo(idEquipo);
+    public AsignacionResponseDTO asignarEquipoToEmpleado(AsignacionRequestDTO requestDTO) {
+
+
+        comprobarEmpleado(requestDTO.getIdEmpleado());
+        comprobarEquipo(requestDTO.getIdEquipo());
 
 
         Asignacion varAsignacion = Asignacion.builder()
-                .idEmpleado(idEmpleado)
-                .idEquipo(idEquipo)
-                .accion("Asignado a empleado: " + idEmpleado)
+                .idEmpleado(requestDTO.getIdEmpleado())
+                .idEquipo(requestDTO.getIdEquipo())
+                .accion("Asignado a empleado: " + requestDTO.getIdEmpleado())
                 .fecha(LocalDate.now())
                 .build();
 
