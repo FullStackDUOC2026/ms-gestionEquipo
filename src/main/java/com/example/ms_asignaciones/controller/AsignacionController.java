@@ -18,7 +18,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 public class AsignacionController {
     private final AsignacionService asignacionService;
 
-    @PostMapping("/{idEquipo}/{idEmpleado}")
+    @PostMapping()
     public ResponseEntity<AsignacionResponseDTO> asignarEquipoToEmpleado (@Valid @RequestBody AsignacionRequestDTO request){
         return ResponseEntity.status(CREATED).body(asignacionService.asignarEquipoToEmpleado(request));
     }
