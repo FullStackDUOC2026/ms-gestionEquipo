@@ -15,7 +15,7 @@ public class WebClientConfig {
     @Bean
     public WebClient webClientEquipo(){
         return WebClient.builder()
-                .baseUrl("https://equipotest-production.up.railway.app/api/v1/equipo")
+                .baseUrl("https://ms-equipo-production.up.railway.app/equipos")
                 .build();
     }
 }
